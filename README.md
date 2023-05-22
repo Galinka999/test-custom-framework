@@ -11,7 +11,7 @@ install migrations:
 - php db/migrations/22052023_create_items_table.php
 - php db/migrations/220520231800_create_item_history_table.php
 
-## Using
+## Usage
 
 The client in the request header must pass the Bearer token.
 
