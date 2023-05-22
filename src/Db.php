@@ -9,37 +9,22 @@ use Symfony\Component\Dotenv\Dotenv;
 
 class Db
 {
-    public function __construct(string $testing = null)
+    public function __construct()
     {
-        $env = new Dotenv;
-        $env->load(__DIR__ . "/../.env");
-
         $config = require_once __DIR__ . '/../configs/database.php';
-        $config = $config['env'];
 
         $capsule = new Capsule;
 
         $capsule->addConnection([
-            'driver' => $config['dev']['adapter'],
-            'host' => $config['dev']['host'],
-            'database' => $config['dev']['name'],
-            'username' => $config['dev']['user'],
-            'password' => $config['dev']['pass'],
+            'driver' => $config['adapter'],
+            'host' => $config['host'],
+            'database' => $config['name'],
+            'username' => $config['user'],
+            'password' => $config['pass'],
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-        ], 'default');
-
-        $capsule->addConnection([
-            'driver' => $config['testing']['adapter'],
-            'host' => $config['testing']['host'],
-            'database' => $config['testing']['name'],
-            'username' => $config['testing']['user'],
-            'password' => $config['testing']['pass'],
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-        ], 'testing');
+        ]);
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();

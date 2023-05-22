@@ -15,7 +15,7 @@ final class Pipeline
         $this->middlewares = $middlewares;
     }
 
-    public function handle(Request $request): Response
+    public function handle(Request $request)
     {
         $middlware = array_shift($this->middlewares);
 
@@ -23,6 +23,6 @@ final class Pipeline
             $middlware->handle($request, [$this, 'handle']);
         }
 
-        return $this->handler->handle($request);
+        $this->handler->handle($request);
     }
 }

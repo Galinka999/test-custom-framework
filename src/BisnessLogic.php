@@ -6,7 +6,7 @@ namespace Engine;
 
 final class BisnessLogic implements Handler
 {
-    public function handle(Request $request): Response
+    public function handle(Request $request): void
     {
         $controller = $request->data['routeInfo'][1][0];
         $method = $request->data['routeInfo'][1][1];
@@ -15,7 +15,5 @@ final class BisnessLogic implements Handler
 
         $handler = new $controller;
         $handler->$method($request);
-
-        return new Response('Ok');
     }
 }

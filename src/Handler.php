@@ -6,5 +6,5 @@ namespace Engine;
 
 interface Handler
 {
-    public function handle(Request $request): Response;
+    public function handle(Request $request): void;
 }

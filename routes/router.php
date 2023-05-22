@@ -52,7 +52,6 @@ switch ($routeInfo[0]) {
 
         $application = new Application(new BisnessLogic(), [
             new Authenticate(),
-            new Validation(),
         ]);
 
         $request = new Request($request);

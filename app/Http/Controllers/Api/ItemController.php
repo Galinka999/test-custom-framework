@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Validations\ItemCreateValidator;
+use App\Http\Validations\ItemUpdateValidator;
+use App\Http\Validations\ItemValidator;
 use App\Models\Item;
-use App\Models\ItemHistory;
 use Carbon\Carbon;
 use Engine\Request;
 use Exception;
@@ -38,6 +40,9 @@ final class ItemController
     {
         $fields = $request->data['fields'];
 
+        $validation = new ItemValidator($fields, 'create');
+        $validation->validate();
+
         $createItem = Item::query()->create($fields);
 
         if($createItem) {
@@ -57,6 +62,10 @@ final class ItemController
     public function update(Request $request)
     {
         $fields = $request->data['fields'];
+
+        $validation = new ItemValidator($fields, 'update');
+        $validation->validate();
+
         $itemId = $request->data['routeInfo'][2]['id'];
 
         $updateItem = Item::query()->find($itemId);
