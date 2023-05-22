@@ -5,11 +5,15 @@
 - cp .env.example .env
 - cp .env.example .env.testing
 - set up database connection in .env file
+- generate an authorization token and register it in .env
 
 install migrations:
 - php db/migrations/22052023_create_items_table.php
 - php db/migrations/220520231800_create_item_history_table.php
 
+## Using
+
+The client in the request header must pass the Bearer token.
 
 ## Testing
 
